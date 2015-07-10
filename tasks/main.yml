@@ -2,9 +2,10 @@
 - include: setup.yml
 
 - name: Set DOCKER_OPTS
-  lineinfile: >
-    dest=/etc/default/docker regexp=^DOCKER_OPTS=
-    line="DOCKER_OPTS=\"{{dokku_docker_opts}}\""
+  lineinfile:
+    dest: /etc/default/docker
+    regexp: '^(#?)DOCKER_OPTS='
+    line: "DOCKER_OPTS=\"{{dokku_docker_opts}}\""
   notify: restart docker
 
 - name: Setup VHOST file
@@ -12,15 +13,6 @@
     dest="{{dokku_root}}/VHOST"
     owner=dokku group=dokku mode=0644
     content="{{dokku_vhost | mandatory}}"
-
-- name: Setup dokkurc
-  template: >
-    src=dokkurc.j2
-    dest={{dokku_root}}/dokkurc
-    owner=dokku
-    mode=0644
-    validate='bash -n %s'
-  notify: install dokku plugins
 
 - name: Fetch custom dokku plugins
   git: >

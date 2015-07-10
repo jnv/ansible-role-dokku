@@ -4,4 +4,4 @@
   command: dokku plugins-install
 
 - name: restart docker
-  service: name=docker state=restarted
+  command: service docker restart # Until ansible/ansible-modules-core#1170 gets fixed

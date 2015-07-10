@@ -1,7 +1,8 @@
 ---
 - name: Install preliminary dependencies
-  apt: name={{ item }}
-       state=present
+  apt:
+    name: "{{ item }}"
+    state: present
   with_items:
   - apt-transport-https # for additional repositories
 
@@ -17,25 +18,35 @@
 # user is automatically added to docker and dokku groups
 # by postinst script
 - name: Create dokku user
-  user: >
-    name=dokku home="{{dokku_root}}" system=yes
+  user:
+    name: dokku
+    home: "{{dokku_root}}"
+    system: yes
 
 - name: Add Docker repository key
-  apt_key: >
-    id="{{docker_repo_key}}" state=present keyserver="keyserver.ubuntu.com"
+  apt_key:
+    id: "{{docker_repo_key}}"
+    state: present
+    keyserver: "keyserver.ubuntu.com"
 
 - name: Add Docker repository
-  apt_repository: >
-    repo="{{docker_repo_url}}" state=present
+  apt_repository:
+    repo: "{{docker_repo_url}}"
+    state: present
 
 - name: Add dokku repository key
-  apt_key: >
-    id="{{dokku_repo_key}}" state=present keyserver=keys.gnupg.net
+  apt_key:
+    id: "{{dokku_repo_key}}"
+    state: present
+    url: "{{dokku_repo_key_url}}"
 
 - name: Add dokku repository
-  apt_repository: >
-    repo="{{dokku_repo_url}}" state=present
+  apt_repository:
+    repo: "{{dokku_repo_url}}"
+    state: present
 
-- name: "Install {{dokku_pkg}}"
-  apt: >
-    name="{{dokku_pkg}}" state=present update_cache=yes
+- name: Install dokku package
+  apt:
+    name: "{{dokku_pkg}}"
+    state: present
+    update_cache: yes

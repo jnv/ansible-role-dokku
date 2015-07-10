@@ -1,3 +1,3 @@
 ---
 # vars file for dokku
-dokku_plugins_dir: /var/lib/dokku-alt/plugins/
+dokku_plugins_dir: /var/lib/dokku/plugins
