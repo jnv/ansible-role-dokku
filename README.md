@@ -1,6 +1,8 @@
-# [Dokku Alternative](https://github.com/dokku-alt/dokku-alt) Role for Ansible
+# Dokku Role for Ansible
 
-Install [Docker](https://www.docker.com/) and [dokku-alt](https://github.com/dokku-alt/dokku-alt) using official PPAs and perform initial setup for Dokku.
+Install [Docker](https://www.docker.com/) and [dokku](https://github.com/progrium/dokku/) using official PPAs and perform initial setup for Dokku.
+
+This role was derived from [jnv.dokku-alt](https://github.com/jnv/ansible-role-dokku-alt).
 
 ## TODO
 
@@ -12,9 +14,12 @@ Install [Docker](https://www.docker.com/) and [dokku-alt](https://github.com/dok
 
 ## Example
 
-    - hosts: servers
-      roles:
-         - { role: jnv.dokku-alt, dokku_vhost: 'dokku.docker.dev' }
+```yaml
+- hosts: servers
+  roles:
+     - role: jnv.dokku,
+       dokku_vhost: 'dokku.docker.dev'
+```
 
 ## License
 
